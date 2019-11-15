@@ -153,6 +153,21 @@ class Main extends CI_Controller {
             
         }
         else{
+            $course_data = $this->MainModel->all_courses();
+            if ($course_data['status']) {
+                $this->load->view('dataplay/courses',$course_data);
+            } else {
+                redirect(CTRL."Main/mainpage");
+            }
+        }
+        
+    }
+    public function all_courses()
+    {
+        $course_data = $this->MainModel->all_courses();
+        if ($course_data['status']) {
+            $this->load->view('dataplay/courses',$course_data);
+        } else {
             redirect(CTRL."Main/mainpage");
         }
         
@@ -186,6 +201,38 @@ class Main extends CI_Controller {
         //this function will retrive all entry in the database
         // $data['query'] = $this->Blog_model->get_all_posts();
         $this->load->view('blog/add_new_entry');
+    }
+
+    public function add_new_comment($id)
+    {
+        $this->load->helper('form');
+        $this->load->library(array('form_validation','session'));
+ 
+        //set validation rules
+        // $this->form_validation->set_rules('entry_name', 'Title', 'required');
+        $this->form_validation->set_rules('comment_body', 'Comment', 'required');
+
+        $user_id = $this->session->userdata('usersecondId');
+        $result = $this->MainModel->get_user_data($user_id);
+ 
+        if ($this->form_validation->run() == FALSE || $result['status'] == FALSE)
+        {
+            //if not valid
+            // $this->load->view('blog/about');
+            redirect(CTRL."Main/post/$id");
+        }
+        else
+        {
+            //if valid
+            $data=array();
+            // $data['entry_name']= $_POST['entry_name'];
+            $data['entry_id'] = $id;
+            $data['comment_name'] = $result['user_data'][0]['fname'];
+            $data['comment_email'] = $result['user_data'][0]['email'];
+            $data['comment_body'] = $_POST['comment_body'];
+            $sheet = $this->Blog_model->add_new_comment($data);
+            redirect(CTRL."Main/post/$id");
+        }
     }
  
     public function add_new_entry()
@@ -237,7 +284,9 @@ class Main extends CI_Controller {
         $data['query'] = $this->Blog_model->get_post($id);
         $ans = $this->Blog_model->get_post_comment($id);
         $data['post_id'] = $id;
-        $data['comments'] = $ans['comment'];
+        if($ans['status']) {
+            $data['comments'] = $ans['comment'];
+        }        
         $data['total_comments'] = $this->Blog_model->total_comments($id);
 
         if($data['query']['status']){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 11, 2019 at 03:28 PM
+-- Generation Time: Nov 15, 2019 at 08:22 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -42,7 +42,8 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`comment_id`, `entry_id`, `comment_name`, `comment_email`, `comment_body`, `comment_date`) VALUES
-(1, 1, 'Ashish', 'ashksin121@gmail.com', 'Test purpose done successfullt!!', '2019-11-09 19:11:24');
+(1, 1, 'Ashish', 'ashksin121@gmail.com', 'Test purpose done successfullt!!', '2019-11-09 19:11:24'),
+(2, 1, 'Demo', 'demo@demo.com', 'testing to add comment', '2019-11-15 07:19:24');
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,8 @@ INSERT INTO `entry` (`entry_id`, `entry_name`, `entry_body`, `entry_date`) VALUE
 (4, 'udsvnjsdnvjsndvj', 'jefnjsenfjsnfjsnfikjsndifukjsnifj', '2019-11-07 11:23:13'),
 (5, 'Hello World', '', '2019-11-07 11:24:22'),
 (6, 'Hello World', 'Blog sent from site', '2019-11-07 11:24:51'),
-(7, 'another one', 'hello feom the other side', '2019-11-07 11:26:59');
+(7, 'another one', 'hello feom the other side', '2019-11-07 11:26:59'),
+(8, 'The Da Vinci Code', 'The Da Vinci Code is a 2003 mystery thriller novel by Dan Brown. It is Brown\'s second novel to include the character Robert Langdon: the first was his 2000 novel Angels & Demons. The Da Vinci Code follows \"symbologist\" Robert Langdon and cryptologist Sophie Neveu after a murder in the Louvre Museum in Paris causes them to become involved in a battle between the Priory of Sion and Opus Dei over the possibility of Jesus Christ having been a companion to Mary Magdalene.\r\n\r\nThe novel explores an alternative religious history, whose central plot point is that the Merovingian kings of France were descended from the bloodline of Jesus Christ and Mary Magdalene, ideas derived from Clive Prince\'s The Templar Revelation (1997) and books by Margaret Starbird. The book also refers to The Holy Blood and the Holy Grail (1982) though Dan Brown has stated that it was not used as research material.\r\n\r\nThe Da Vinci Code provoked a popular interest in speculation concerning the Holy Grail legend and Mary Magdalene\'s role in the history of Christianity. The book has, however, been extensively denounced by many Christian denominations as an attack on the Catholic Church, and consistently criticized for its historical and scientific inaccuracies. The novel nonetheless became a worldwide bestseller[1] that sold 80 million copies as of 2009[2] and has been translated into 44 languages. In November 2004, Random House published a Special Illustrated Edition with 160 illustrations. In 2006, a film adaptation was released by Columbia Pictures.', '2019-11-14 07:29:03');
 
 -- --------------------------------------------------------
 
@@ -217,7 +219,8 @@ INSERT INTO `registered` (`user_first_id`, `user_second_id`, `fname`, `sname`, `
 (1, 'a19359d19f56997f6b9e4b6abac2ca2d', 'Kaus', 'Pathak', 'kaus.pathak@gmail.com', '76c430e61c7451d25d214f0367593bb464e5010db6ee79e81122df60f8947b03', 'user'),
 (2, 'd23f67088519c7660fe7c1740e2289f0', 'Ashish', 'Singh', 'ashksin121@gmail.com', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5', 'user'),
 (3, '1f3e84d29ce8e3fdad3d6867ba7b3c1b', 'Demo', 'Demo', 'demo@demo.com', '2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea', 'user'),
-(4, '317ab7c66326bf3690e9201998d05e6a', 'Test', 'Test', 'test@test.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'user');
+(4, '317ab7c66326bf3690e9201998d05e6a', 'Test', 'Test', 'test@test.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'user'),
+(5, 'bc94d77807a7a69786360500295f45f4', 'Dan', 'Brown', 'qwe@qwe.com', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5', 'user');
 
 --
 -- Indexes for dumped tables
@@ -279,7 +282,7 @@ ALTER TABLE `registered`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -291,7 +294,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `entry`
 --
 ALTER TABLE `entry`
-  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `link`
@@ -315,7 +318,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `registered`
 --
 ALTER TABLE `registered`
-  MODIFY `user_first_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_first_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

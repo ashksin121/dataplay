@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Course Details</title>
+<title>Deep Learning</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Unicat project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="<?=THEME?>styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
 <link href="<?=THEME?>plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="<?=THEME?>plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<?=THEME?>plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -40,6 +41,7 @@
 										<i class="fa fa-envelope-o" aria-hidden="true"></i>
 										<div>info.deercreative@gmail.com</div>
 									</li>
+
 								</ul>
 								<div class="top_bar_login ml-auto">
 									<div class="login_button"><a href="#">Register or Login</a></div>
@@ -59,14 +61,14 @@
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
 								<a href="#">
-									<div class="logo_text">Unic<span>at</span></div>
+									<div class="logo_text"><a href="<?=CTRL?>Main/mainpage">Unic<span>at</span></a></div>
 								</a>
 							</div>
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
 									<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
 									<li><a href="<?=CTRL?>Main/about">About</a></li>
-									<li><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
+									<li class="active"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
 									<li><a href="<?=CTRL?>Main/index">Blog</a></li>
 									<!-- <li><a href="#">Page</a></li> -->
 									<!-- <li><a href="contact.html">Contact</a></li> -->
@@ -74,11 +76,11 @@
 										<li><a href="<?=CTRL?>Main/logout">Logout</a></li>
 									<?php }?>
 								</ul>
-								<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+								<!-- <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div> -->
 
 								<!-- Hamburger -->
 
-								<div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+								<!-- <div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div> -->
 								<div class="hamburger menu_mm">
 									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
 								</div>
@@ -125,7 +127,7 @@
 			<ul class="menu_mm">
 				<li class="menu_mm"><a href="<?=CTRL?>Main/mainpage">Home</a></li>
 				<li class="menu_mm"><a href="<?=CTRL?>Main/about">About</a></li>
-				<li class="menu_mm"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
+				<li class="menu_mm active"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
 				<li class="menu_mm"><a href="<?=CTRL?>Main/index">Blog</a></li>
 				<!-- <li class="menu_mm"><a href="#">Page</a></li> -->
 				<!-- <li class="menu_mm"><a href="contact.html">Contact</a></li> -->
@@ -145,9 +147,9 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li><a href="courses.html">Courses</a></li>
-								<li>Course Details</li>
+								<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
+								<li><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
+								<li>Deep Learning</li>
 							</ul>
 						</div>
 					</div>
@@ -167,17 +169,17 @@
 					
 					<div class="course_container">
 						<div class="course_title">Deep Learning</div>
+						<br>
 						<div>
 							<?php if(!$this->session->userdata('isUserLoggedIn')) {?>
-							<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal1">Register Now</button>
-							<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target=".modal2">Login</button>	
-							<?php }?>
-							<?php if($check===2) {?>
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal1">Register Now</button>
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".modal2">Login</button>	
+							<?php } elseif($check===2) {?>
 								<form>
-						         	<button type="submit" formaction="<?=CTRL?>Products/buy/3">Register to Course</button>
+						         	<button type="submit" class="btn btn-outline-primary" formaction="<?=CTRL?>Products/buy/1">Register to Course</button>
 						      	</form>
 						    <?php } else {?>
-						    	<a href="<?= base_url(); ?>index.php/Main/course_dl/" class="btn btn-outline-primary" role="button">Go to Course</a>
+						    	<a href="<?= base_url(); ?>index.php/Main/course_stats/" class="btn btn-outline-primary" role="button">Go to Course</a>
 						    <?php }?>
 							
 						</div>
@@ -237,11 +239,11 @@
 												<p>This course is intended for anyone interested in learning to master his or her own body.This course is aimed at beginners, so no previous experience with hand balancing skillts is necessary Aenean viverra tincidunt nibh, in imperdiet nunc. Suspendisse eu ante pretium, consectetur leo at, congue quam. Nullam hendrerit porta ante vitae tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
 											</div>
 										</div>
-										<div class="tab_panel_faq">
-											<div class="tab_panel_title">FAQ</div>
+									<!-- 	<div class="tab_panel_faq">
+											<div class="tab_panel_title">FAQ</div> -->
 
 											<!-- Accordions -->
-											<div class="accordions">
+											<!-- <div class="accordions">
 												
 												<div class="elements_accordions">
 
@@ -283,7 +285,7 @@
 												</div>
 
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 
@@ -560,30 +562,30 @@
 						</div>
 
 						<!-- Latest Course -->
-						<div class="sidebar_section">
+						<!-- <div class="sidebar_section">
 							<div class="sidebar_section_title">Latest Courses</div>
-							<div class="sidebar_latest">
+							<div class="sidebar_latest"> -->
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+								<!-- <div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img src="images/latest_1.jpg" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">How to Design a Logo a Beginners Course</a></div>
 										<div class="latest_price">Free</div>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+								<!-- <div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img src="images/latest_2.jpg" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">Photography for Beginners Masterclass</a></div>
 										<div class="latest_price">$170</div>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+								<!-- <div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img src="images/latest_3.jpg" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">The Secrets of Body Language</a></div>
@@ -592,13 +594,16 @@
 								</div>
 
 							</div>
-						</div>
+						</div> -->
 
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
+
+
 
 	<!-- Newsletter -->
 
@@ -628,7 +633,139 @@
 			</div>
 		</div>
 	</div>  -->
+		<!-- Large Modal for Register Button-->
+	<div class="modal  fade bd-example-modal-lg " id="modal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Register</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+						<form class="needs-validation" action="<?=CTRL?>Main/new_register" method="post" novalidate> 					
+							<div class="form-group row">
+								<label for="validationCustom01" class="col-sm-2 col-form-label">First name</label>
+								<div class="col-sm-10">
+								<input type="text" name ="first_name" class="form-control" id="validationCustom01" placeholder="First name" required>
+								</div>
+								<div class="valid-feedback">
+									Looks good!
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="validationCustom02" class="col-sm-2 col-form-label">Last name</label>
+								<div class="col-sm-10">
+								<input type="text" name ="last_name" class="form-control" id="validationCustom02" placeholder="Last name" required>
+								</div>
+								<div class="valid-feedback">
+									Looks good!
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="validationCustomUsername" class="col-sm-2 col-form-label">E - Mail</label>
+								<div class="col-sm-10">
+								<input type=email name="email" class="form-control" id="validationCustomUsername" placeholder="E Mail" aria-describedby="inputGroupPrepend" required>
+								</div>
+								<div class="valid-feedback">
+									Please Enter a Email.
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+								<div class="col-sm-10">
+								<input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+								</div>
+							</div>
+							<button class="btn btn-primary" type="submit" name="submit" value="submit" >Submit form</button>
+						</form>
+							<script>
+							(function() {
+							'use strict';
+							window.addEventListener('load', function() {
+								var forms = document.getElementsByClassName('needs-validation');
+								var validation = Array.prototype.filter.call(forms, function(form) {
+								form.addEventListener('submit', function(event) {
+									if (form.checkValidity() === false) {
+									event.preventDefault();
+									event.stopPropagation();
+									}
+									form.classList.add('was-validated');
+								}, false);
+								});
+							}, false);
+							})();
+							</script>
+				</div>					
+			</div>
+		</div>
+	</div>
+	</div>
 	
+
+	<!-- Second Modal-->
+	<div class="modal fade bd-example-modal-lg modal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body">
+				<div class="container"> 
+					<!-- <div class="row"> -->
+						<form class="needs-validation" action="<?=CTRL?>Main/main_login" method="post" novalidate> 					
+							<div class="form-group row">
+								<label for="validationCustomUsername" class="col-sm-2 col-form-label">E - Mail</label>
+								<div class="col-sm-10">
+								<input type=email name="email" class="form-control" id="validationCustomUsername" placeholder="E Mail" aria-describedby="inputGroupPrepend" required>
+								</div>
+								<div class="valid-feedback">
+									Please Enter a Email.
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+								<div class="col-sm-10">
+								<input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+								</div>
+							</div>
+							<button class="btn btn-primary" type="submit" name="submit" value="submit" >Login</button>
+						</form>
+							<script>
+							// Example starter JavaScript for disabling form submissions if there are invalid fields
+							(function() {
+							'use strict';
+							window.addEventListener('load', function() {
+								// Fetch all the forms we want to apply custom Bootstrap validation styles to
+								var forms = document.getElementsByClassName('needs-validation');
+								// Loop over them and prevent submission
+								var validation = Array.prototype.filter.call(forms, function(form) {
+								form.addEventListener('submit', function(event) {
+									if (form.checkValidity() === false) {
+									event.preventDefault();
+									event.stopPropagation();
+									}
+									form.classList.add('was-validated');
+								}, false);
+								});
+							}, false);
+							})();
+							</script>
+					<!-- </div> -->
+				</div>					
+			</div>
+			<!-- <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div> -->
+		</div>
+	</div>
+	</div>
 	<!-- Footer -->
 
 	<footer class="footer">
@@ -738,13 +875,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</footer>
 </div>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="plugins/colorbox/jquery.colorbox-min.js"></script>
-<script src="js/course.js"></script>
+<script src="<?=THEME?>js/jquery-3.2.1.min.js"></script>
+<script src="<?=THEME?>styles/bootstrap4/popper.js"></script>
+<script src="<?=THEME?>styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+<script src="<?=THEME?>plugins/greensock/TweenMax.min.js"></script>
+<script src="<?=THEME?>plugins/greensock/TimelineMax.min.js"></script>
+<script src="<?=THEME?>plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="<?=THEME?>plugins/greensock/animation.gsap.min.js"></script>
+<script src="<?=THEME?>plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="<?=THEME?>plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="<?=THEME?>plugins/easing/easing.js"></script>
+<script src="<?=THEME?>plugins/parallax-js-master/parallax.min.js"></script>
+<script src="<?=THEME?>js/custom.js"></script>
 </body>
 </html>

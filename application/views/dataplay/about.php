@@ -59,26 +59,26 @@
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
 								<a href="#">
-									<div class="logo_text">Unic<span>at</span></div>
+									<div class="logo_text"><a href="<?=CTRL?>Main/mainpage">Unic<span>at</span></a></div>
 								</a>
 							</div>
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
 									<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
-									<li><a href="<?=CTRL?>Main/about">About</a></li>
+									<li class="active"><a href="<?=CTRL?>Main/about">About</a></li>
 									<li><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="#">Page</a></li>
+									<li><a href="<?=CTRL?>Main/index">Blog</a></li>
+									<!-- <li><a href="#">Page</a></li> -->
 									<!-- <li><a href="contact.html">Contact</a></li> -->
 									<?php if($this->session->userdata('isUserLoggedIn')) {?>
 										<li><a href="<?=CTRL?>Main/logout">Logout</a></li>
 									<?php }?>
 								</ul>
-								<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+								<!-- <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div> -->
 
 								<!-- Hamburger -->
 
-								<div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+								<!-- <div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div> -->
 								<div class="hamburger menu_mm">
 									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
 								</div>
@@ -124,10 +124,10 @@
 		<nav class="menu_nav">
 			<ul class="menu_mm">
 				<li class="menu_mm"><a href="<?=CTRL?>Main/mainpage">Home</a></li>
-				<li class="menu_mm"><a href="#">About</a></li>
+				<li class="menu_mm active"><a href="#">About</a></li>
 				<li class="menu_mm"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
-				<li class="menu_mm"><a href="#">Blog</a></li>
-				<li class="menu_mm"><a href="#">Page</a></li>
+				<li class="menu_mm"><a href="<?=CTRL?>Main/index">Blog</a></li>
+				<!-- <li class="menu_mm"><a href="#">Page</a></li> -->
 				<!-- <li class="menu_mm"><a href="contact.html">Contact</a></li> -->
 				<?php if($this->session->userdata('isUserLoggedIn')) {?>
 					<li><a href="<?=CTRL?>Main/logout">Logout</a></li>
@@ -145,7 +145,7 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
 								<li>About</li>
 							</ul>
 						</div>
@@ -219,13 +219,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="row feature_row">
+			<!-- <div class="row feature_row"> -->
 
 				<!-- Feature Content -->
-				<div class="col-lg-6 feature_col">
-					<div class="feature_content">
+				<!-- <div class="col-lg-6 feature_col">
+					<div class="feature_content"> -->
 						<!-- Accordions -->
-						<div class="accordions">
+						<!-- <div class="accordions">
 							
 							<div class="elements_accordions">
 
@@ -259,13 +259,13 @@
 
 							</div>
 
-						</div>
+						</div> -->
 						<!-- Accordions End -->
-					</div>
-				</div>
+					<!-- </div>
+				</div> -->
 
 				<!-- Feature Video -->
-				<div class="col-lg-6 feature_col">
+				<!-- <div class="col-lg-6 feature_col">
 					<div class="feature_video d-flex flex-column align-items-center justify-content-center">
 						<div class="feature_video_background" style="background-image:url(images/video.jpg)"></div>
 						<a class="vimeo feature_video_button" href="https://player.vimeo.com/video/99340873?title=0" title="OH, PORTUGAL - IN 4K - Basti Hansen - Stock Footage">
@@ -273,7 +273,7 @@
 						</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -292,8 +292,8 @@
 			<div class="row team_row">
 				
 				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
+				<div class="col-lg-4 team_col">
+					<!-- <div class="team_item">
 						<div class="team_image"><img src="images/team_1.jpg" alt=""></div>
 						<div class="team_body">
 							<div class="team_title"><a href="#">Jacke Masito</a></div>
@@ -306,16 +306,16 @@
 								</ul>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
+				<div class="col-lg-4 team_col">
 					<div class="team_item">
-						<div class="team_image"><img src="images/team_2.jpg" alt=""></div>
+						<div class="team_image"><img src="<?=THEME?>images/teacher_1.jpg" alt=""></div>
 						<div class="team_body">
-							<div class="team_title"><a href="#">William James</a></div>
-							<div class="team_subtitle">Designer & Website</div>
+							<div class="team_title"><a href="#">Nishant Gupta</a></div>
+							<div class="team_subtitle">Specializing Subject</div>
 							<div class="social_list">
 								<ul>
 									<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -328,8 +328,8 @@
 				</div>
 
 				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
+				<div class="col-lg-4 team_col">
+					<!-- <div class="team_item">
 						<div class="team_image"><img src="images/team_3.jpg" alt=""></div>
 						<div class="team_body">
 							<div class="team_title"><a href="#">John Tyler</a></div>
@@ -342,11 +342,11 @@
 								</ul>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
+				<!-- <div class="col-lg-3 col-md-6 team_col">
 					<div class="team_item">
 						<div class="team_image"><img src="images/team_4.jpg" alt=""></div>
 						<div class="team_body">
@@ -361,7 +361,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 		</div>
@@ -369,39 +369,39 @@
 
 	<!-- Counter -->
 
-	<div class="counter">
+	<!-- <div class="counter">
 		<div class="counter_background" style="background-image:url(images/counter_background.jpg)"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="counter_content">
 						<h2 class="counter_title">Register Now</h2>
-						<div class="counter_text"><p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dumy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
+						<div class="counter_text"><p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dumy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div> -->
 
 						<!-- Milestones -->
 
-						<div class="milestones d-flex flex-md-row flex-column align-items-center justify-content-between">
+						<!-- <div class="milestones d-flex flex-md-row flex-column align-items-center justify-content-between"> -->
 							
 							<!-- Milestone -->
-							<div class="milestone">
+							<!-- <div class="milestone">
 								<div class="milestone_counter" data-end-value="15">0</div>
 								<div class="milestone_text">years</div>
-							</div>
+							</div> -->
 
 							<!-- Milestone -->
-							<div class="milestone">
+							<!-- <div class="milestone">
 								<div class="milestone_counter" data-end-value="120" data-sign-after="k">0</div>
 								<div class="milestone_text">years</div>
-							</div>
+							</div> -->
 
 							<!-- Milestone -->
-							<div class="milestone">
+							<!-- <div class="milestone">
 								<div class="milestone_counter" data-end-value="670" data-sign-after="+">0</div>
 								<div class="milestone_text">years</div>
-							</div>
+							</div> -->
 
 							<!-- Milestone -->
-							<div class="milestone">
+		<!-- 					<div class="milestone">
 								<div class="milestone_counter" data-end-value="320">0</div>
 								<div class="milestone_text">years</div>
 							</div>
@@ -433,7 +433,7 @@
 			</div>
 
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Partners -->
 

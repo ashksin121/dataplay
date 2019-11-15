@@ -63,6 +63,34 @@ Class MainModel extends CI_Model
             return $result;
         }
 
+        public function get_user_data($user_id) {
+            $result = array();
+            $sql = "SELECT * FROM registered WHERE user_second_id='$user_id'";
+            $query = $this->db->query($sql);
+            if ($query->num_rows() > 0) {
+                $data = $query->result_array();
+                $result['user_data'] = $data;
+                $result['status'] = true;
+            } else {
+                $result['status'] = false;
+            }   
+            return $result;
+        }
+
+        public function all_courses() {
+            $result = array();
+            $sql = "SELECT course_id,course_name,course_author,course_description,course_rating,link FROM courses ";
+            $query = $this->db->query($sql);
+            if ($query->num_rows() > 0) {
+                $data = $query->result_array();
+                $result['course'] = $data;
+                $result['status'] = true;
+            } else {
+                $result['status'] = false;
+            }   
+            return $result;
+        }
+
         public function getcurrent($id) {
             $result = array();
             $sql = "SELECT * FROM link WHERE link_id='$id'";

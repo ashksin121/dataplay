@@ -24,16 +24,16 @@ Class Blog_model extends CI_Model
         $this->db->insert('entry',$data);
     }
 
-    function add_new_comment($post_id,$commentor,$email,$comment)
-{
-    $data = array(
-        'entry_id'=>$post_id,
-        'comment_name'=>$commentor,
-        'comment_email'=>$email,
-        'comment_body'=>$comment,
-    );
-    $this->db->insert('comment',$data);
-}
+    function add_new_comment($data)
+    {
+        // $data = array(
+        //     'entry_id'=>$post_id,
+        //     'comment_name'=>$commentor,
+        //     'comment_email'=>$email,
+        //     'comment_body'=>$comment,
+        // );
+        $this->db->insert('comment',$data);
+    }
  
 function get_post($id)
 {

@@ -59,7 +59,7 @@
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
 								<a href="#">
-									<div class="logo_text">Unic<span>at</span></div>
+									<div class="logo_text"><a href="<?=CTRL?>Main/mainpage">Unic<span>at</span></a></div>
 								</a>
 							</div>
 							<nav class="main_nav_contaner ml-auto">
@@ -68,17 +68,17 @@
 									<li><a href="<?=CTRL?>Main/about">About</a></li>
 									<li class="active"><a href="#">Courses</a></li>
 									<li><a href="<?=CTRL?>Main/index">Blog</a></li>
-									<li><a href="#">Page</a></li>
+									<!-- <li><a href="#">Page</a></li> -->
 									<!-- <li><a href="contact.html">Contact</a></li> -->
 									<?php if($this->session->userdata('isUserLoggedIn')) {?>
 										<li><a href="<?=CTRL?>Main/logout">Logout</a></li>
 									<?php }?>
 								</ul>
-								<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+								<!-- <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div> -->
 
 								<!-- Hamburger -->
 
-								<div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+								<!-- <div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div> -->
 								<div class="hamburger menu_mm">
 									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
 								</div>
@@ -127,7 +127,7 @@
 				<li class="menu_mm"><a href="<?=CTRL?>Main/about">About</a></li>
 				<li class="menu_mm"><a href="#">Courses</a></li>
 				<li class="menu_mm"><a href="<?=CTRL?>Main/index">Blog</a></li>
-				<li class="menu_mm"><a href="#">Page</a></li>
+				<!-- <li class="menu_mm"><a href="#">Page</a></li> -->
 				<!-- <li class="menu_mm"><a href="contact.html">Contact</a></li> -->
 				<?php if($this->session->userdata('isUserLoggedIn')) {?>
 					<li><a href="<?=CTRL?>Main/logout">Logout</a></li>
@@ -145,7 +145,7 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
 								<li>Courses</li>
 							</ul>
 						</div>
@@ -257,21 +257,21 @@
 
 	<!-- Newsletter -->
 
-	<div class="newsletter">
+	<!-- <div class="newsletter">
 		<div class="newsletter_background parallax-window" data-parallax="scroll" data-image-src="<?=THEME?>images/newsletter.jpg" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
+ -->
 						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
+						<!-- <div class="newsletter_content text-lg-left text-center">
 							<div class="newsletter_title">sign up for news and offers</div>
 							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
+						</div> -->
 
 						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
+						<!-- <div class="newsletter_form_container ml-lg-auto">
 							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
 								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
 								<button type="submit" class="newsletter_button">subscribe</button>
@@ -282,7 +282,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Footer -->
 

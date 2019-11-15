@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Course Details</title>
+<title>Statistics</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Unicat project">
@@ -61,14 +61,14 @@
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
 								<a href="#">
-									<div class="logo_text">Unic<span>at</span></div>
+									<div class="logo_text"><a href="<?=CTRL?>Main/mainpage">Unic<span>at</span></a></div>
 								</a>
 							</div>
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
 									<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
 									<li><a href="<?=CTRL?>Main/about">About</a></li>
-									<li><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
+									<li class="active"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
 									<li><a href="<?=CTRL?>Main/index">Blog</a></li>
 									<!-- <li><a href="#">Page</a></li> -->
 									<!-- <li><a href="contact.html">Contact</a></li> -->
@@ -76,11 +76,11 @@
 										<li><a href="<?=CTRL?>Main/logout">Logout</a></li>
 									<?php }?>
 								</ul>
-								<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+								<!-- <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div> -->
 
 								<!-- Hamburger -->
 
-								<div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+								<!-- <div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div> -->
 								<div class="hamburger menu_mm">
 									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
 								</div>
@@ -127,7 +127,7 @@
 			<ul class="menu_mm">
 				<li class="menu_mm"><a href="<?=CTRL?>Main/mainpage">Home</a></li>
 				<li class="menu_mm"><a href="<?=CTRL?>Main/about">About</a></li>
-				<li class="menu_mm"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
+				<li class="menu_mm active"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
 				<li class="menu_mm"><a href="<?=CTRL?>Main/index">Blog</a></li>
 				<!-- <li class="menu_mm"><a href="#">Page</a></li> -->
 				<!-- <li class="menu_mm"><a href="contact.html">Contact</a></li> -->
@@ -147,9 +147,9 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li><a href="courses.html">Courses</a></li>
-								<li>Course Details</li>
+								<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
+								<li><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
+								<li>Introduction to Statistics</li>
 							</ul>
 						</div>
 					</div>
@@ -169,14 +169,14 @@
 					
 					<div class="course_container">
 						<div class="course_title">Introduction to Statistics</div>
+						<br>
 						<div>
 							<?php if(!$this->session->userdata('isUserLoggedIn')) {?>
-							<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal1">Register Now</button>
-							<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target=".modal2">Login</button>	
-							<?php }?>
-							<?php if($check===2) {?>
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal1">Register Now</button>
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".modal2">Login</button>	
+							<?php } elseif($check===2) {?>
 								<form>
-						         	<button type="submit" formaction="<?=CTRL?>Products/buy/1">Register to Course</button>
+						         	<button type="submit" class="btn btn-outline-primary" formaction="<?=CTRL?>Products/buy/1">Register to Course</button>
 						      	</form>
 						    <?php } else {?>
 						    	<a href="<?= base_url(); ?>index.php/Main/course_stats/" class="btn btn-outline-primary" role="button">Go to Course</a>
@@ -239,11 +239,11 @@
 												<p>This course is intended for anyone interested in learning to master his or her own body.This course is aimed at beginners, so no previous experience with hand balancing skillts is necessary Aenean viverra tincidunt nibh, in imperdiet nunc. Suspendisse eu ante pretium, consectetur leo at, congue quam. Nullam hendrerit porta ante vitae tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
 											</div>
 										</div>
-										<div class="tab_panel_faq">
-											<div class="tab_panel_title">FAQ</div>
+									<!-- 	<div class="tab_panel_faq">
+											<div class="tab_panel_title">FAQ</div> -->
 
 											<!-- Accordions -->
-											<div class="accordions">
+											<!-- <div class="accordions">
 												
 												<div class="elements_accordions">
 
@@ -285,7 +285,7 @@
 												</div>
 
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 
@@ -562,30 +562,30 @@
 						</div>
 
 						<!-- Latest Course -->
-						<div class="sidebar_section">
+						<!-- <div class="sidebar_section">
 							<div class="sidebar_section_title">Latest Courses</div>
-							<div class="sidebar_latest">
+							<div class="sidebar_latest"> -->
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+								<!-- <div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img src="images/latest_1.jpg" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">How to Design a Logo a Beginners Course</a></div>
 										<div class="latest_price">Free</div>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+								<!-- <div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img src="images/latest_2.jpg" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">Photography for Beginners Masterclass</a></div>
 										<div class="latest_price">$170</div>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+								<!-- <div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img src="images/latest_3.jpg" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">The Secrets of Body Language</a></div>
@@ -594,7 +594,7 @@
 								</div>
 
 							</div>
-						</div>
+						</div> -->
 
 					</div>
 				</div>
@@ -638,7 +638,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			<h5 class="modal-title" id="exampleModalLabel">Register</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button>
@@ -710,7 +710,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			<h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button>
