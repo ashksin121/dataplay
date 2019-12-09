@@ -137,6 +137,10 @@ class Main extends CI_Controller {
     {
         $this->load->view('dataplay/about');
     }
+    public function no_courses_yet() 
+    {
+        $this->load->view('dataplay/no_courses_yet');
+    }
     public function coursepage()
     {
         // $this->load->Model('NotesModel');
@@ -148,7 +152,7 @@ class Main extends CI_Controller {
             if ($course_data['status']) {
                 $this->load->view('dataplay/courses',$course_data);
             } else {
-                redirect(CTRL."Main/mainpage");
+                redirect(CTRL."Main/no_courses_yet");
             }
             
         }
@@ -181,13 +185,116 @@ class Main extends CI_Controller {
             $data['sname'] = $_POST['last_name'];
             $data['email'] = $_POST['email'];
             $data['password'] = hash(sha256 , $_POST['password']);
+            $hash = md5(rand(0, 1000));
+            $data['hash'] = $hash;
             //$this->load->Model('MainModel');
             $sheet = $this->MainModel->newregistermodel($data);
             if($sheet['status_1']==1){
+                
+                    // redirect(CTRL."Main/mainpage");
+                // $config = array(
+                //     'protocol' => 'smtp',
+                //     'smtp_host' => 'ssl://smtp.googlemail.com',
+                //     'smtp_port' => 465,
+                //     'smtp_user' => '<a href="mailto:ashishkirtis@gmail.com" rel="nofollow">ashishkirtis@gmail.com</a>', // change it to yours
+                //     'smtp_pass' => 'Dhannu@IIITMG', // change it to yours
+                //     'mailtype' => 'html',
+                //     'charset' => 'iso-8859-1',
+                //     'wordwrap' => TRUE
+                // );
+                $message =  "<!DOCTYPE html><html><head></head><body>";
+                $message .= '<p>Dear ' . $data['fname'] . ',</p>';
+                $message .= "Click <strong><a href='localhost/dataplay/index.php/Main/activate/".$data['user_second_id']."/".$data['hash']."'>here</a> </strong> to activate your account";
+                $message .= '</body></html>';
+     
+                $this->load->library('email');
+                $config = array();
+                $config['protocol']    = 'smtp';
+                $config['smtp_host']    = 'ssl://smtp.gmail.com';
+                $config['smtp_port']    = '465';
+                $config['smtp_timeout'] = '7';
+                $config['smtp_user']    = 'akirtis.1999@gmail.com';
+                $config['smtp_pass']    = 'Dhannu@IIITMG';
+                $config['charset']    = 'utf-8';
+                $config['newline']    = "\r\n";
+                $config['mailtype'] = 'html'; // or html
+                $config['validation'] = TRUE; // bool whether to validate email or not 
+                $this->email->set_mailtype('html');
+                $this->email->initialize($config);
+                $this->email->from('ashksin121@gmail.com', 'Dataplay');
+                $this->email->to($data['email']);
+                $this->email->subject('Signup Verification Email');
+                $this->email->message($message);
+     
+                //sending email
+                if($this->email->send()){
+                    $this->session->set_flashdata('message','Activation code sent to email');
+                }
+                else{
+                    $this->session->set_flashdata('message', $this->email->print_debugger());
+                    redirect(CTRL."Main/about");
+                }
+     
+                // redirect('register');
                 redirect(CTRL."Main/mainpage");
             }
                    
         }
+    }
+
+    public function activate(){
+        $id =  $this->uri->segment(3);
+        $code = $this->uri->segment(4);
+ 
+        //fetch user details
+        $user = $this->MainModel->getUser($id);
+ 
+        //if code matches
+        if($user['hash'] == $code){
+            //update user active status
+            $data['is_verified'] = true;
+            $query = $this->MainModel->activate($data, $id);
+ 
+            if($query){
+                $this->session->set_flashdata('message', 'User activated successfully');
+            }
+            else{
+                $this->session->set_flashdata('message', 'Something went wrong in activating account');
+            }
+        }
+        else{
+            $this->session->set_flashdata('message', 'Cannot activate account. Code didnt match');
+        }
+ 
+        // redirect('register');
+        redirect(CTRL."Main/mainpage");
+ 
+    }
+
+    public function send_confirmation() {
+        $this->load->library('email');      //load email library
+        $this->email->from('ashksin121@gmail.com', 'My Site'); //sender's email
+        $address = $_POST['email'];   //receiver's email
+        $subject="Welcome to MySite!";    //subject
+        $message= /*-----------email body starts-----------*/
+        'Thanks for signing up, '.$_POST['fname'].'!
+
+        Your account has been created. 
+        Here are your login details.
+        -------------------------------------------------
+        Email   : ' . $_POST['email'] . '
+        Password: ' . $_POST['password'] . '
+        -------------------------------------------------
+                        
+        Please click this link to activate your account:
+            
+        ' . base_url() . 'index.php/user_registration/verify?' . 
+        'email=' . $_POST['email'] . '&hash=' . $this->data['hash'] ;
+        /*-----------email body ends-----------*/             
+        $this->email->to($address);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
     }
     function index()
     {
@@ -347,7 +454,7 @@ class Main extends CI_Controller {
                 $data['email'] = $this->input->post('email');
                 $data['password'] = hash(sha256 , $this->input->post('password'));
                 $checkLogin = $this->MainModel->logincheckmodel($data);
-                if($checkLogin['login_status']){
+                if($checkLogin['login_status'] && $checkLogin['data'][0]['is_verified']){
                     $this->session->set_userdata('isUserLoggedIn',TRUE);
                     $this->session->set_userdata('usersecondId',$checkLogin['data'][0]['user_second_id']);
                     redirect(CTRL."Main/coursepage", $course_data['course']);
@@ -362,8 +469,9 @@ class Main extends CI_Controller {
                     // echo "<script>console.log('" . $enrolled . "');</script>";
                     // echo "<script>console.log('" . json_encode($enrolled) . "');</script>";
                 }else{
+                    $this->session->set_flashdata('message', 'Something went wrong in activating account');
                     $data['error_msg'] = 'Wrong email or password, please try again.';
-                    redirect(CTRL."Main/wrongpage");
+                    redirect(CTRL."Main/mainpage");
                 }
             }
         }

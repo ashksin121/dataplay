@@ -179,7 +179,7 @@
 						         	<button type="submit" class="btn btn-outline-primary" formaction="<?=CTRL?>Products/buy/1">Register to Course</button>
 						      	</form>
 						    <?php } else {?>
-						    	<a href="<?= base_url(); ?>index.php/Main/course_stats/" class="btn btn-outline-primary" role="button">Go to Course</a>
+						    	<a href="<?=CTRL?>Main/course_ml/" class="btn btn-outline-primary" role="button">Go to Course</a>
 						    <?php }?>
 							
 						</div>

@@ -66,7 +66,7 @@
 								<ul class="main_nav">
 									<li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
 									<li><a href="<?=CTRL?>Main/about">About</a></li>
-									<li class="active"><a href="#">Courses</a></li>
+									<li class="active"><a href="<?=CTRL?>Main/coursepage">Courses</a></li>
 									<li><a href="<?=CTRL?>Main/index">Blog</a></li>
 									<!-- <li><a href="#">Page</a></li> -->
 									<!-- <li><a href="contact.html">Contact</a></li> -->

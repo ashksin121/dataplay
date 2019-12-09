@@ -49,7 +49,9 @@
 				</div>
 			</div>				
 		</div> -->
-
+		<?php if($this->session->flashdata('message')) {?>
+										alert(<?php $this->session->flashdata('message')?>)
+									<?php }?>
 		<!-- Header Content -->
 		<div class="header_container">
 			<div class="container">
@@ -563,7 +565,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<div class="courses_button trans_200"><a href="<?=CTRL?>Main/coursepage">view all courses</a></div>
+					<div class="courses_button trans_200"><a href="<?=CTRL?>Main/all_courses">view all courses</a></div>
 				</div>
 			</div>
 		</div>

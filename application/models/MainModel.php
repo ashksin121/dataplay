@@ -24,7 +24,7 @@ Class MainModel extends CI_Model
         }
         public function logincheckmodel($data){
             $condition = "email =" . "'" . $data['email'] . "' AND " . "password =" . "'" . $data['password'] . "'";
-            $this->db->select('user_second_id,fname,sname,email');
+            $this->db->select('user_second_id,fname,sname,email,is_verified');
             $this->db->where($condition);
             $this->db->from('registered');
             $query=$this->db->get();
@@ -34,6 +34,15 @@ Class MainModel extends CI_Model
                     }
             return $result;
 
+        }
+        public function getUser($id){
+            $query = $this->db->get_where('registered',array('user_second_id'=>$id));
+            return $query->row_array();
+        }
+     
+        public function activate($data, $id){
+            $this->db->where('registered.user_second_id', $id);
+            return $this->db->update('registered', $data);
         }
         // public function enrolledcheckmodel($id){
         //     $condition = "user_id =" . "'" . $id . "'";
