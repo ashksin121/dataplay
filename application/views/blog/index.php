@@ -166,10 +166,12 @@
             <h2><a style="font-family: 'Roboto Slab', serif;font-size: 36px;font-weight: 700;color: green;" href="<?=CTRL?>Main/new_entry"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Create a new post</a></h2>
           <?php } ?>
           <!-- <h2>This is my blog</h2> -->
+          <!-- <h1><?php echo $status; ?></h1> -->
           <?php if($query):foreach($query as $post):?>
             <br>
-          <h2><a style="font-family: 'Roboto Slab', serif;font-size: 36px;font-weight: 700;color: black;" href='<?=CTRL?>Main/post/<?php echo $post->entry_id;?>'><?php echo $post->entry_name;?> </a></h2>
+          <h2><a style="font-family: 'Roboto Slab', serif;font-size: 36px;font-weight: 700;color: black;" href="<?=CTRL?>Main/post/<?php echo $post->entry_id;?>"><?php echo $post->entry_name;?> </a></h2>
           <h4>(<?php echo $post->entry_date;?>)</h4>
+          <h6><?php echo $post->rating;?><i class='fa fa-star' style='color:yellow'></i></h6>
           <!-- <p>
             <a ><span class="glyphicon glyphicon-edit" title="Edit post"></span></a> |
             <a ><span style="color:#f77;" class="glyphicon glyphicon-remove-circle" title="Delete post"></span></a>

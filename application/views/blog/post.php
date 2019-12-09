@@ -146,7 +146,7 @@
             <div class="breadcrumbs">
               <ul>
                 <li><a href="<?=CTRL?>Main/mainpage">Home</a></li>
-                <li>Blog</li>
+                <li><a href="<?=CTRL?>Main/index">Blog</a></li>
                 <li><?php echo $query['post'][0]['entry_name'];?></li>
               </ul>
             </div>
@@ -165,6 +165,10 @@
         <div class="col-lg-10">
           <!-- <h1>hdfhhsdfhs</h1> -->
           <h2><?php echo $query['post'][0]['entry_name'];?></h2>
+          <h6><?php echo $query['post'][0]['rating'];?><i class='fa fa-star' style='color:yellow'></i>   
+          <?php if($check['status'] === false) { ?>
+          <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".modal1"><span style="font-size: 16px">Rate the Blog</span></button>
+          <?php } ?></h6>
           <p><?php echo $query['post'][0]['entry_body']?></p>
           <h3><i class="fa fa-comment" aria-hidden="true"></i>Comments</h3>
           <!-- <?php echo $total_comments?> -->
@@ -192,6 +196,41 @@
         <div class="col-lg-1"></div>
       </div>
     </div>
+  </div>
+
+  <!-- Large Modal for Rating Button-->
+  <div class="modal fade bd-example-modal-lg modal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Rate It!!</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <!-- <div class="row"> -->
+            <form name="new_rating" action="<?=CTRL?>Main/new_rating/<?php echo $post_id;?>" method="post">          
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Rate out of 5</label>
+                <div class="col-sm-10">
+                <input type="text" name ="rating" class="form-control" placeholder="0" required>
+                </div>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit" name="submit" value="submit" >Submit</button>
+            </form>
+        </div>          
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
   </div>
 
   <!-- Newsletter -->

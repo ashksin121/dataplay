@@ -10,8 +10,21 @@ Class Blog_model extends CI_Model
     function get_all_posts()
     {
         //get all entry
-        $query = $this->db->get('entry');
+        $this->db->from('entry');
+        $this->db->order_by("rating","desc");
+        $query = $this->db->get();
         return $query->result();
+        // $sql = "SELECT entry_id,entry_name,entry_body,entry_date,rating FROM entry ORDER BY rating DESC";
+        // $query = $this->db->query($sql);
+        // $result = array();
+        // if ($query->num_rows() > 0) {
+        //     $data = $query->result_array();
+        //     $result['data'] = $data;
+        //     $result['status'] = true;
+        // } else {
+        //     $result['status'] = false;
+        // }   
+        // return $result;
     }
  
     function add_new_entry($data)
@@ -38,11 +51,32 @@ Class Blog_model extends CI_Model
 function get_post($id)
 {
     $result = array();
-    $sql = "SELECT entry_name,entry_body,entry_date FROM entry WHERE entry_id='$id'";
+    $sql = "SELECT entry_name,entry_body,entry_date,rating FROM entry WHERE entry_id='$id'";
     $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {
         $data = $query->result_array();
         $result['post'] = $data;
+        $result['status'] = true;
+    } else {
+        $result['status'] = false;
+    }   
+    return $result;
+    // $this->db->where('entry_id',$id);
+    // $query = $this->db->get('entry');
+    // if($query->num_rows()!==0)
+    // {
+    //     return $query->result();
+    // }
+    // else
+    //     return FALSE;
+}
+
+function check_rating($id,$user_id)
+{
+    $result = array();
+    $sql = "SELECT * FROM rating WHERE post_id='$id' AND user_id='$user_id'";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
         $result['status'] = true;
     } else {
         $result['status'] = false;

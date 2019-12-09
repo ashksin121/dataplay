@@ -86,6 +86,40 @@ Class MainModel extends CI_Model
             return $result;
         }
 
+        public function rating_count($id,$user_id,$rate) {
+            $result = array();
+            $sql = "SELECT * FROM entry WHERE entry_id='$id'";
+            $query = $this->db->query($sql);
+            if ($query->num_rows() > 0) {
+                $data = $query->result_array();
+                $sum = $data[0]['sum'];
+                $count = $data[0]['count'];
+                $sum = $sum + $rate;
+                $count = $count + 1;
+                $rating = $sum / $count;
+                $data = array(
+                    'rating' => $rating,
+                    'count' => $count,
+                    'sum' => $sum
+                );
+
+                $this->db->where('entry_id', $id);
+                return $this->db->update('entry', $data);
+                $result['status'] = true;
+            } else {
+                $result['status'] = false;
+            }   
+            return $result;
+        }
+
+        public function update_rating($id,$user_id) {
+            $data = array(
+                'user_id' => $user_id,
+                'post_id' => $id
+            );
+            $this->db->insert('rating',$data);
+        }
+
         public function all_courses() {
             $result = array();
             $sql = "SELECT course_id,course_name,course_author,course_description,course_rating,link FROM courses ";

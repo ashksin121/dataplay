@@ -391,6 +391,11 @@ class Main extends CI_Controller {
         $data['query'] = $this->Blog_model->get_post($id);
         $ans = $this->Blog_model->get_post_comment($id);
         $data['post_id'] = $id;
+        $data['check'] = true;
+        if($this->session->userdata('isUserLoggedIn')) {
+            $user_id = $this->session->userdata['usersecondId'];
+            $data['check'] = $this->Blog_model->check_rating($id,$user_id);
+        }
         if($ans['status']) {
             $data['comments'] = $ans['comment'];
         }        
@@ -444,6 +449,17 @@ class Main extends CI_Controller {
         $this->session->sess_destroy();
         // redirect(base_url().'index.php/blog/');
         redirect(CTRL."Main/mainpage");
+    }
+    public function new_rating($id)
+    {
+        $user_id = $this->session->userdata['usersecondId'];
+        $rate = $_POST['rating'];
+        $result = $this->MainModel->rating_count($id,$user_id,$rate);
+        $data = $this->MainModel->update_rating($id,$user_id);
+        // if($data['status'] && $result['status']) {
+        redirect(CTRL."Main/post/$id");
+        // }
+        // redirect(CTRL."Main/mainpage");
     }
     public function main_login(){
         if($this->input->post('submit')){
