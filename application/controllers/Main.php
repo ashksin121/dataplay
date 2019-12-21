@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once(APPPATH."libraries/lib/config_paytm.php");
+require_once(APPPATH."libraries/lib/encdec_paytm.php");
+
+require_once (APPPATH.'../assets/razorpay-php/Razorpay.php');
+use Razorpay\Api\Api as RazorpayApi;
+
 class Main extends CI_Controller {
 
 	/**
@@ -213,15 +219,15 @@ class Main extends CI_Controller {
                 $config['smtp_host']    = 'ssl://smtp.gmail.com';
                 $config['smtp_port']    = '465';
                 $config['smtp_timeout'] = '7';
-                $config['smtp_user']    = 'akirtis.1999@gmail.com';
-                $config['smtp_pass']    = 'Dhannu@IIITMG';
+                $config['smtp_user']    = CONFIRMATION_MAIL_ID;
+                $config['smtp_pass']    = CONFIRMATION_MAIL_PSWD;
                 $config['charset']    = 'utf-8';
                 $config['newline']    = "\r\n";
                 $config['mailtype'] = 'html'; // or html
                 $config['validation'] = TRUE; // bool whether to validate email or not 
                 $this->email->set_mailtype('html');
                 $this->email->initialize($config);
-                $this->email->from('ashksin121@gmail.com', 'Dataplay');
+                $this->email->from(CONFIRMATION_MAIL_ID, 'Dataplay');
                 $this->email->to($data['email']);
                 $this->email->subject('Signup Verification Email');
                 $this->email->message($message);
@@ -490,6 +496,226 @@ class Main extends CI_Controller {
                     redirect(CTRL."Main/mainpage");
                 }
             }
+        }
+    }
+
+
+
+
+
+    //Paytm
+    public function paytm_payment($id) {
+        $checkSum = "";
+        $data = array();
+        $data["paramList"] = array();
+
+        $userid = $this->session->userdata['usersecondId'];
+        $orderid = $id.$userid;
+
+        $ORDER_ID = $orderid;
+        $CUST_ID = $userid;
+        $INDUSTRY_TYPE_ID = "RETAIL";
+        $CHANNEL_ID = "WEB";
+        $TXN_AMOUNT = "1000";
+
+        // Create an array having all required parameters for creating checksum.
+        $data["paramList"]["MID"] = PAYTM_MERCHANT_MID;
+        $data["paramList"]["ORDER_ID"] = $ORDER_ID;
+        $data["paramList"]["CUST_ID"] = $CUST_ID;
+        $data["paramList"]["INDUSTRY_TYPE_ID"] = $INDUSTRY_TYPE_ID;
+        $data["paramList"]["CHANNEL_ID"] = $CHANNEL_ID;
+        $data["paramList"]["TXN_AMOUNT"] = $TXN_AMOUNT;
+        $data["paramList"]["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
+
+        
+        $paramList["CALLBACK_URL"] = CTRL."Main/paytm_response";
+       /* $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
+        $paramList["EMAIL"] = $EMAIL; //Email ID of customer
+        $paramList["VERIFIED_BY"] = "EMAIL"; //
+        $paramList["IS_USER_VERIFIED"] = "YES"; //
+
+        */
+
+        //Here checksum string will return by getChecksumFromArray() function.
+        $data["checkSum"] = getChecksumFromArray($data["paramList"],PAYTM_MERCHANT_KEY);
+
+        $this->load->view('paytm/redirect',$data);
+    }
+
+    public function paytm_response() {
+        $paytmChecksum = "";
+        $paramList = array();
+        $isValidChecksum = "FALSE";
+
+        $data = array();
+        $data["paramList"] = $_POST;
+        $paytmChecksum = isset($_POST["CHECKSUMHASH"]) ? $_POST["CHECKSUMHASH"] : ""; //Sent by Paytm pg
+
+        //Verify all parameters received from Paytm pg to your application. Like MID received from paytm pg is same as your applications MID, TXN_AMOUNT and ORDER_ID are same as what was sent by you to Paytm PG for initiating transaction etc.
+        $data['isValidChecksum'] = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum); //will return TRUE or FALSE string.
+
+        $this->load->view('paytm/response',$data);
+    }
+
+
+
+    // checkout page
+    public function checkout($id) {
+        $data['title'] = 'Checkout payment';  
+        // $this->site->setProductID($id);
+        $data['itemInfo'] = $this->MainModel->get_data($id); 
+        $data['return_url'] = CTRL.'Main/subscr';
+        $data['surl'] = CTRL.'Main/success';;
+        $data['furl'] = CTRL.'Main/failed';;
+        $data['currency_code'] = 'INR';
+        $this->load->view('razorpay/checkout', $data);
+    }
+
+    // initialized cURL Request
+    private function get_curl_handle($payment_id, $amount)  {
+        $url = 'https://api.razorpay.com/v1/payments/'.$payment_id.'/capture';
+        $key_id = RAZOR_KEY_ID;
+        $key_secret = RAZOR_KEY_SECRET;
+        $fields_string = "amount=$amount";
+        //cURL Request
+        $ch = curl_init();
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_USERPWD, $key_id.':'.$key_secret);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__).'/ca-bundle.crt');
+        return $ch;
+    }   
+        
+    // callback method
+    public function callback() {        
+        if (!empty($this->input->post('razorpay_payment_id')) && !empty($this->input->post('merchant_order_id'))) {
+            $razorpay_payment_id = $this->input->post('razorpay_payment_id');
+            $merchant_order_id = $this->input->post('merchant_order_id');
+            $currency_code = 'INR';
+            $amount = $this->input->post('merchant_total');
+            $success = false;
+            $data = array();
+            $data['razorpay_order_id'] = $this->input->post('razorpay_order_id');
+            $data['razorpay_payment_id'] = $this->input->post('razorpay_payment_id');
+            $data['razorpay_signature'] = $this->input->post('razorpay_signature');
+            $this->load->view('razorpay/failed', $data);
+            // $error = '';
+            // if ($http_status === 200 and isset($response_array['error']) === false) {
+            //     $success = true;
+            // } else {
+            //     $success = false;
+            //     if (!empty($response_array['error']['code'])) {
+            //         $error = $response_array['error']['code'].':'.$response_array['error']['description'];
+            //     } else {
+            //         $error = 'RAZORPAY_ERROR:Invalid Response <br/>'.$result;
+            //     }
+            // }
+            // try {                
+            //     $ch = $this->get_curl_handle($razorpay_payment_id, $amount);
+            //     //execute post
+            //     $result = curl_exec($ch);
+            //     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            //     if ($result === false) {
+            //         $success = false;
+            //         $error = 'Curl error: '.curl_error($ch);
+            //         redirect(CTRL.'Main/about');
+            //     } else {
+            //         $response_array = json_decode($result, true);
+            //        // echo "<pre>";print_r($response_array);exit;
+            //             //Check success response
+            //             if ($http_status === 200 and isset($response_array['error']) === false) {
+            //                 $success = true;
+            //             } else {
+            //                 $success = false;
+            //                 if (!empty($response_array['error']['code'])) {
+            //                     $error = $response_array['error']['code'].':'.$response_array['error']['description'];
+            //                 } else {
+            //                     $error = 'RAZORPAY_ERROR:Invalid Response <br/>'.$result;
+            //                 }
+            //             }
+            //     }
+            //     //close connection
+            //     curl_close($ch);
+            // } catch (Exception $e) {
+            //     $success = false;
+            //     $error = 'OPENCART_ERROR:Request to Razorpay Failed';
+            // }
+            // if ($success === true) {
+            //     if(!empty($this->session->userdata('ci_subscription_keys'))) {
+            //         $this->session->unset_userdata('ci_subscription_keys');
+            //      }
+            //     if (!$order_info['order_status_id']) {
+            //         redirect($this->input->post('merchant_surl_id'));
+            //     } else {
+            //         redirect($this->input->post('merchant_surl_id'));
+            //     }
+
+            // } else {
+            //     redirect($this->input->post('merchant_furl_id'));
+            // }
+        } else {
+            echo 'An error occured. Contact site administrator, please!';
+        }
+    } 
+    public function success() {
+        $data['title'] = 'Razorpay Success | TechArise';  
+        $this->load->view('razorpay/success', $data);
+    }  
+    public function failed() {
+        $data['title'] = 'Razorpay Failed | TechArise';            
+        $this->load->view('razorpay/failed', $data);
+    }
+
+
+    public function subscr($id){
+        
+        $api = new RazorpayApi(RAZOR_KEY_ID, RAZOR_KEY_SECRET);
+
+        $params = array(
+            'count' => 2,
+            'skip'  => 1,
+            'from'  => 1400826740
+        );
+        //payment authorize and capture
+
+        // fetching parameters
+        // $payments = $api->payment->all($params);
+        $pid = $_POST["razorpay_payment_id"];
+        // $oid = $_POST["razorpay_order_id"]; 
+        $payment = $api->payment->fetch($pid);
+        //getting customer id from session
+        $cust_id = $this->session->userdata['usersecondId']; 
+        // $oid = $payment->orderid;
+        // $id = str_replace($cust_id, "", $oid);
+
+        
+        // Capturing Payment
+        $amount =  $payment->amount;
+        $capture = $payment->capture(array('amount' => $amount));
+        $status = $capture->status;
+        if($status=="captured"){
+            // Creating Subscription
+             // $subscription  = $api->subscription->create(array('plan_id' => 'plan_9P0j9AqN3nsBpm', 'customer_notify' => 1, 'customer_id' => $cust_id, 'total_count' => 6, 'addons' => array(array('item' => array('name' => 'Delivery charges', 'amount' => 30000, 'currency' => 'INR')))));
+        // }   
+        // if($subscription->id){
+            // $subscribe['sub_id'] = $subscription->id;
+            // $subscribe['cust_rp_id'] = $cust_id;
+            // $result = $this->Data->update_sub_Customer($subscribe);
+            // header('Location: http://localhost/ancatag/mars/');
+            // $data = array();
+            // $data['user'] = $cust_id;
+            // $data['order'] = $oid;
+            // $data['id'] = $id;
+            $check = $this->MainModel->update_enrolled($id,$cust_id);
+            redirect(CTRL.'Main/coursepage');
+        // $this->load->view('razorpay/failed', $data);
+        } else {
+            redirect(CTRL.'Main/coursepage');
         }
     }
 }

@@ -52,3 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// Stripe routes
+$route['my-stripe'] = "StripeController";
+$route['stripePost']['post'] = "StripeController/stripePost";
+
+
+//razorpay
+$route['checkout/(:any)'] = "razorpay/checkout/$1";

@@ -49,9 +49,9 @@
 				</div>
 			</div>				
 		</div> -->
-		<?php if($this->session->flashdata('message')) {?>
+		<!-- <?php if($this->session->flashdata('message')) {?>
 										alert(<?php $this->session->flashdata('message')?>)
-									<?php }?>
+									<?php }?> -->
 		<!-- Header Content -->
 		<div class="header_container">
 			<div class="container">
@@ -257,8 +257,8 @@
 
 		<!-- Home Slider Nav -->
 
-		<div class="home_slider_nav home_slider_prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-		<div class="home_slider_nav home_slider_next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+		<!-- <div class="home_slider_nav home_slider_prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+		<div class="home_slider_nav home_slider_next"><i class="fa fa-angle-right" aria-hidden="true"></i></div> -->
 	</div>
 <!-- Large Modal for Register Button-->
 	<div class="modal fade bd-example-modal-lg modal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -824,7 +824,7 @@
 				<div class="col">
 					<div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
 						<div class="cr_text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by ashksin121
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
 						<div class="ml-lg-auto cr_links">
 							<ul class="cr_list">

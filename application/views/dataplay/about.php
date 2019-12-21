@@ -167,6 +167,19 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="row" style="margin-top: 5em;">
+				<div class="col">
+					<div class="section_title_container text-center">
+						<h2 class="section_title">Why Choose Us</h2>
+						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
+					</div>
+					<div style="margin-top: 5em;">
+						<p align="center"><iframe align="middle" width="560" height="315" src="https://www.youtube.com/embed/Y66j_BUCBMY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+					</div>
+				</div>
+			</div>
+
 			<div class="row about_row">
 				
 				<!-- About Item -->
@@ -208,7 +221,7 @@
 
 	<!-- Feature -->
 
-	<div class="feature">
+	<!-- <div class="feature">
 		<div class="feature_background" style="background-image:url(images/courses_background.jpg)"></div>
 		<div class="container">
 			<div class="row">
@@ -218,7 +231,7 @@
 						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- <div class="row feature_row"> -->
 
 				<!-- Feature Content -->
@@ -274,8 +287,8 @@
 					</div>
 				</div>
 			</div> -->
-		</div>
-	</div>
+		<!-- </div>
+	</div> -->
 
 	<!-- Team -->
 
@@ -562,7 +575,7 @@
 				<div class="col">
 					<div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
 						<div class="cr_text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by ashksin121
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
 						<div class="ml-lg-auto cr_links">
 							<ul class="cr_list">

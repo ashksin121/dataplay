@@ -60,7 +60,7 @@ Class MainModel extends CI_Model
         // }
         public function coursedatamodel($user_id) {
             $result = array();
-            $sql = "SELECT courses.course_id,course_name,course_author,course_description,course_rating,link FROM courses, enrolled WHERE courses.course_id=enrolled.course_id AND enrolled.user_id='$user_id'";
+            $sql = "SELECT courses.course_id,course_name,course_author,course_description,course_rating,link,price FROM courses, enrolled WHERE courses.course_id=enrolled.course_id AND enrolled.user_id='$user_id'";
             $query = $this->db->query($sql);
             if ($query->num_rows() > 0) {
                 $data = $query->result_array();
@@ -70,6 +70,29 @@ Class MainModel extends CI_Model
                 $result['status'] = false;
             }   
             return $result;
+        }
+
+        public function get_data($id) {
+            $result = array();
+            $sql = "SELECT id,name,price FROM products WHERE id='$id'";
+            $query = $this->db->query($sql);
+            if ($query->num_rows() > 0) {
+                $data = $query->result_array();
+                $result['data'] = $data[0];
+                $result['status'] = true;
+            } else {
+                $result['status'] = false;
+            }   
+            return $result;
+        }
+
+        public function update_enrolled($id,$user_id) {
+            $data = array(
+                'user_id' => $user_id,
+                'course_id' => $id
+            );
+
+            $this->db->insert('enrolled', $data);
         }
 
         public function get_user_data($user_id) {
@@ -122,7 +145,7 @@ Class MainModel extends CI_Model
 
         public function all_courses() {
             $result = array();
-            $sql = "SELECT course_id,course_name,course_author,course_description,course_rating,link FROM courses ";
+            $sql = "SELECT course_id,course_name,course_author,course_description,course_rating,link,price FROM courses ";
             $query = $this->db->query($sql);
             if ($query->num_rows() > 0) {
                 $data = $query->result_array();

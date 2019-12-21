@@ -521,3 +521,9 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+// Stripe payment gateway
+$config['stripe_key'] = 'pk_test_HoIILcUzjtOv3SaXAeZEbGt300Tc9avB8p';
+
+$config['stripe_secret'] = 'sk_test_mlC0XLitAkei2HWqP4mMCZSd00S2ddyOT4';
