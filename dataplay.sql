@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2019 at 08:22 AM
+-- Generation Time: Dec 21, 2019 at 08:45 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -42,8 +42,9 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`comment_id`, `entry_id`, `comment_name`, `comment_email`, `comment_body`, `comment_date`) VALUES
-(1, 1, 'Ashish', 'ashksin121@gmail.com', 'Test purpose done successfullt!!', '2019-11-09 19:11:24'),
-(2, 1, 'Demo', 'demo@demo.com', 'testing to add comment', '2019-11-15 07:19:24');
+(8, 11, 'Jane', 'ashishkirtis@gmail.com', 'Awesomeeee Blog <3\r\n', '2019-12-21 07:32:56'),
+(9, 11, 'John', 'ashksin121@gmail.com', 'The blog sucks!!!!!!!!', '2019-12-21 07:33:39'),
+(10, 12, 'John', 'ashksin121@gmail.com', 'Now this is lit!!!!!\r\n', '2019-12-21 07:34:48');
 
 -- --------------------------------------------------------
 
@@ -57,17 +58,18 @@ CREATE TABLE `courses` (
   `course_author` varchar(32) NOT NULL,
   `course_description` varchar(32) NOT NULL,
   `course_rating` varchar(32) NOT NULL,
-  `link` varchar(50) DEFAULT NULL
+  `link` varchar(50) DEFAULT NULL,
+  `price` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`course_id`, `course_name`, `course_author`, `course_description`, `course_rating`, `link`) VALUES
-(1, 'Introduction to Statistics', 'Nishant Gupta', 'Desc1', '4.5', 'statistics'),
-(2, 'Machine Learning', 'Nishant Gupta', 'Desc2', '4.5', 'ml'),
-(3, 'Deep Learning', 'Nishant Gupta', 'Desc3', '4.5', 'dl');
+INSERT INTO `courses` (`course_id`, `course_name`, `course_author`, `course_description`, `course_rating`, `link`, `price`) VALUES
+(1, 'Introduction to Statistics', 'Nishant Gupta', 'Desc1', '4.5', 'statistics', 1500),
+(2, 'Machine Learning', 'Nishant Gupta', 'Desc2', '4.5', 'ml', 2500),
+(3, 'Deep Learning', 'Nishant Gupta', 'Desc3', '4.5', 'dl', 700);
 
 -- --------------------------------------------------------
 
@@ -85,13 +87,10 @@ CREATE TABLE `enrolled` (
 --
 
 INSERT INTO `enrolled` (`user_id`, `course_id`) VALUES
-('1f3e84d29ce8e3fdad3d6867ba7b3c1b', 3),
-('317ab7c66326bf3690e9201998d05e6a', 2),
-('317ab7c66326bf3690e9201998d05e6a', 3),
-('a19359d19f56997f6b9e4b6abac2ca2d', 1),
-('a19359d19f56997f6b9e4b6abac2ca2d', 3),
-('d23f67088519c7660fe7c1740e2289f0', 1),
-('d23f67088519c7660fe7c1740e2289f0', 2);
+('0757c222db505441a3cabb601b95d62c', 3),
+('0ae3fd1c2de52680d87ed049293c2907', 1),
+('0ae3fd1c2de52680d87ed049293c2907', 2),
+('0ae3fd1c2de52680d87ed049293c2907', 3);
 
 -- --------------------------------------------------------
 
@@ -103,22 +102,19 @@ CREATE TABLE `entry` (
   `entry_id` int(11) NOT NULL,
   `entry_name` varchar(255) NOT NULL,
   `entry_body` text NOT NULL,
-  `entry_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `entry_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `rating` float NOT NULL DEFAULT 0,
+  `count` int(32) NOT NULL DEFAULT 0,
+  `sum` int(32) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `entry`
 --
 
-INSERT INTO `entry` (`entry_id`, `entry_name`, `entry_body`, `entry_date`) VALUES
-(1, 'DEMO', 'testing', '2019-11-05 02:50:48'),
-(2, 'Actual Demo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel felis vestibulum, venenatis tellus in, mattis nisl. Proin lectus tortor, pulvinar at nisi nec, tempor lobortis mauris. Vestibulum molestie nisl in ante vehicula, sit amet sagittis sem luctus. Aenean laoreet urna quis ipsum scelerisque bibendum. Aenean non augue condimentum, rutrum magna eget, vestibulum eros. Ut velit magna, efficitur eu pulvinar sed, egestas eu magna. Mauris vulputate maximus nisl, eu volutpat augue placerat eu. Aliquam erat volutpat. Quisque accumsan augue eu urna efficitur, ac commodo ipsum egestas. Ut tincidunt metus in diam facilisis consectetur. Aenean at venenatis est. Vestibulum varius, dolor id ullamcorper dictum, enim magna venenatis enim, id pretium magna nunc at mauris. Ut iaculis nisl nec odio ornare viverra a posuere metus. Phasellus mauris magna, tempor vitae elit nec, fringilla sodales diam. Phasellus purus felis, rhoncus at tempor id, accumsan ornare leo.\r\n\r\nInterdum et malesuada fames ac ante ipsum primis in faucibus. Ut placerat vel metus eget fringilla. Vivamus sed libero sed nisi imperdiet rutrum. Pellentesque eu purus felis. Curabitur ut hendrerit metus. Donec augue tortor, egestas et dui in, laoreet ultrices magna. Donec bibendum pellentesque ante, eget porttitor diam dapibus ac. Ut rutrum imperdiet sem, sed sodales nisi placerat quis.\r\n\r\nMorbi scelerisque varius enim, et consectetur lectus tempus vel. Integer at porta elit. Ut efficitur, arcu a pharetra lobortis, lacus libero pretium ligula, vel tristique tellus quam vitae ipsum. Cras purus elit, volutpat vitae nibh nec, lobortis ultrices felis. Aliquam quis nibh viverra, porta eros eget, blandit quam. Sed varius eu nibh sed rhoncus. Nunc tincidunt, enim nec aliquet aliquet, neque massa ultricies diam, quis rutrum enim libero quis elit. In porta placerat turpis, id malesuada tellus consequat ut. Sed quis ullamcorper massa. Ut molestie elit dolor, egestas vehicula lacus elementum ut. Donec molestie hendrerit tellus, semper iaculis arcu interdum fermentum. Duis at nunc imperdiet, facilisis metus rhoncus, posuere augue. Suspendisse potenti.\r\n\r\nDonec et nisi eu sem lobortis malesuada eu vitae quam. Praesent quis massa dui. Pellentesque quis elit ornare, molestie lectus ac, commodo est. Curabitur quis dui ligula. Proin ullamcorper orci tortor, quis auctor tortor ullamcorper ac. Maecenas tincidunt blandit rhoncus. Praesent laoreet augue vitae nulla dignissim, id mattis libero sodales. Maecenas neque orci, consectetur non suscipit in, sagittis at mauris. Ut vehicula lorem et velit pharetra pulvinar. Phasellus tristique nisl et lacus rhoncus, in pellentesque mauris vulputate. Ut tincidunt mauris in ante venenatis egestas. Integer at elementum turpis. Maecenas tincidunt lacinia vehicula. Vivamus eu scelerisque magna.\r\n\r\nEtiam mi justo, egestas sed tortor in, accumsan porttitor justo. Etiam commodo convallis augue eu iaculis. Suspendisse ut rutrum nibh, efficitur varius leo. Sed semper ex id vehicula tristique. Aenean finibus odio quam. Vestibulum dignissim scelerisque arcu, eu pellentesque metus facilisis sit amet. Nulla magna libero, mattis nec erat id, luctus sagittis augue. Suspendisse commodo vitae eros at maximus. Suspendisse in cursus nulla. Aenean magna metus, mattis quis nisl id, eleifend hendrerit ligula. Etiam efficitur sem sit amet dui tempus, vel volutpat ex aliquet. Phasellus maximus odio urna, a porttitor nulla porta id. Proin ultricies quis augue quis lacinia. Etiam viverra ligula at mauris porttitor dapibus.', '2019-11-06 11:15:20'),
-(3, 'udsvnjsdnvjsndvj', 'jefnjsenfjsnfjsnfikjsndifukjsnifj', '2019-11-07 11:23:03'),
-(4, 'udsvnjsdnvjsndvj', 'jefnjsenfjsnfjsnfikjsndifukjsnifj', '2019-11-07 11:23:13'),
-(5, 'Hello World', '', '2019-11-07 11:24:22'),
-(6, 'Hello World', 'Blog sent from site', '2019-11-07 11:24:51'),
-(7, 'another one', 'hello feom the other side', '2019-11-07 11:26:59'),
-(8, 'The Da Vinci Code', 'The Da Vinci Code is a 2003 mystery thriller novel by Dan Brown. It is Brown\'s second novel to include the character Robert Langdon: the first was his 2000 novel Angels & Demons. The Da Vinci Code follows \"symbologist\" Robert Langdon and cryptologist Sophie Neveu after a murder in the Louvre Museum in Paris causes them to become involved in a battle between the Priory of Sion and Opus Dei over the possibility of Jesus Christ having been a companion to Mary Magdalene.\r\n\r\nThe novel explores an alternative religious history, whose central plot point is that the Merovingian kings of France were descended from the bloodline of Jesus Christ and Mary Magdalene, ideas derived from Clive Prince\'s The Templar Revelation (1997) and books by Margaret Starbird. The book also refers to The Holy Blood and the Holy Grail (1982) though Dan Brown has stated that it was not used as research material.\r\n\r\nThe Da Vinci Code provoked a popular interest in speculation concerning the Holy Grail legend and Mary Magdalene\'s role in the history of Christianity. The book has, however, been extensively denounced by many Christian denominations as an attack on the Catholic Church, and consistently criticized for its historical and scientific inaccuracies. The novel nonetheless became a worldwide bestseller[1] that sold 80 million copies as of 2009[2] and has been translated into 44 languages. In November 2004, Random House published a Special Illustrated Edition with 160 illustrations. In 2006, a film adaptation was released by Columbia Pictures.', '2019-11-14 07:29:03');
+INSERT INTO `entry` (`entry_id`, `entry_name`, `entry_body`, `entry_date`, `rating`, `count`, `sum`) VALUES
+(11, 'Jane Doe', '\"John Doe\" (for males) and \"Jane Doe\" (for females) are multiple-use names that are used when the true name of a person is unknown or is being intentionally concealed.In the context of law enforcement in the United States, such names are often used to refer to a corpse whose identity is unknown or unconfirmed. Secondly, such names are also often used to refer to a hypothetical \"everyman\" in other contexts, in a manner similar to \"John Q. Public\" or \"Joe Public\". There are many variants to the above names, including \"John Roe\", \"Richard Roe\", \"Jane Roe\" and \"Baby Doe\", \"Janie Doe\" or \"Johnny Doe\" (for children)', '2019-12-21 07:32:11', 3.5, 2, 7),
+(12, 'Digital Fortress', 'When the United States National Security Agency\'s code-breaking supercomputer TRANSLTR encounters a revolutionary new code, Digital Fortress, that it cannot break, Commander Trevor Strathmore calls in head cryptographer Susan Fletcher to crack it. She is informed by Strathmore that it was written by Ensei Tankado, a former NSA employee who became displeased with the NSA\'s intrusion into people\'s private lives. If the NSA doesn\'t reveal TRANSLTR to the public, Tankado intends to auction the code\'s algorithm on his website and have his partner, \"North Dakota\", release it for free if he dies, essentially holding the NSA hostage. Strathmore tells Susan that Tankado in fact died in Seville, of what appears to be a heart attack which he is intend to keep a secret because if Tankado\'s partner finds that he will upload the code. The agency is determined to stop Digital Fortress from becoming a threat to national security.', '2019-12-21 07:34:33', 4, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -182,7 +178,7 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `image` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `price` float(10,2) NOT NULL,
+  `price` int(5) NOT NULL,
   `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -191,9 +187,29 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `image`, `price`, `status`) VALUES
-(1, 'Introduction to Statistics', 'partner_1.png', 1.00, '1'),
-(2, 'Machine Learning', 'partner_2.png', 25.00, '1'),
-(3, 'Deep Learning', 'partner_2.png', 1.00, '1');
+(1, 'Introduction to Statistics', 'partner_1.png', 1500, '1'),
+(2, 'Machine Learning', 'partner_2.png', 2500, '1'),
+(3, 'Deep Learning', 'partner_2.png', 700, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating`
+--
+
+CREATE TABLE `rating` (
+  `user_id` varchar(32) NOT NULL,
+  `post_id` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`user_id`, `post_id`) VALUES
+('0757c222db505441a3cabb601b95d62c', 11),
+('0ae3fd1c2de52680d87ed049293c2907', 11),
+('0ae3fd1c2de52680d87ed049293c2907', 12);
 
 -- --------------------------------------------------------
 
@@ -208,19 +224,18 @@ CREATE TABLE `registered` (
   `sname` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `user_type` varchar(11) NOT NULL DEFAULT 'user'
+  `user_type` varchar(11) NOT NULL DEFAULT 'user',
+  `is_verified` int(1) NOT NULL DEFAULT 0,
+  `hash` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `registered`
 --
 
-INSERT INTO `registered` (`user_first_id`, `user_second_id`, `fname`, `sname`, `email`, `password`, `user_type`) VALUES
-(1, 'a19359d19f56997f6b9e4b6abac2ca2d', 'Kaus', 'Pathak', 'kaus.pathak@gmail.com', '76c430e61c7451d25d214f0367593bb464e5010db6ee79e81122df60f8947b03', 'user'),
-(2, 'd23f67088519c7660fe7c1740e2289f0', 'Ashish', 'Singh', 'ashksin121@gmail.com', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5', 'user'),
-(3, '1f3e84d29ce8e3fdad3d6867ba7b3c1b', 'Demo', 'Demo', 'demo@demo.com', '2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea', 'user'),
-(4, '317ab7c66326bf3690e9201998d05e6a', 'Test', 'Test', 'test@test.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'user'),
-(5, 'bc94d77807a7a69786360500295f45f4', 'Dan', 'Brown', 'qwe@qwe.com', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5', 'user');
+INSERT INTO `registered` (`user_first_id`, `user_second_id`, `fname`, `sname`, `email`, `password`, `user_type`, `is_verified`, `hash`) VALUES
+(18, '0ae3fd1c2de52680d87ed049293c2907', 'John', 'Doe', 'ashksin121@gmail.com', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5', 'user', 1, '07a96b1f61097ccb54be14d6a47439b0'),
+(19, '0757c222db505441a3cabb601b95d62c', 'Jane', 'Doe', 'ashishkirtis@gmail.com', '65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5', 'user', 1, '3416a75f4cea9109507cacd8e2f2aefc');
 
 --
 -- Indexes for dumped tables
@@ -269,6 +284,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`user_id`,`post_id`);
+
+--
 -- Indexes for table `registered`
 --
 ALTER TABLE `registered`
@@ -282,7 +303,7 @@ ALTER TABLE `registered`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -294,7 +315,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `entry`
 --
 ALTER TABLE `entry`
-  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `link`
@@ -318,7 +339,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `registered`
 --
 ALTER TABLE `registered`
-  MODIFY `user_first_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_first_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
