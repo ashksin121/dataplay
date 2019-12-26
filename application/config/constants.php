@@ -87,7 +87,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 //Razorpay
-define('RAZOR_KEY_ID', 'rzp_test_a8zNiJNHfXoEC9');
-define('RAZOR_KEY_SECRET', 'BiUrR95ZzeIKLHaEGpvuCmM1');
-define('CONFIRMATION_MAIL_ID', 'akirtis.1999@gmail.com');
-define('CONFIRMATION_MAIL_PSWD', 'Dhannu@IIITMG');
+define('RAZOR_KEY_ID', '');
+define('RAZOR_KEY_SECRET', '');
+define('CONFIRMATION_MAIL_ID', '');
+define('CONFIRMATION_MAIL_PSWD', '');
